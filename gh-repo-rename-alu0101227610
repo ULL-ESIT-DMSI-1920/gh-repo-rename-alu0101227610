@@ -3,6 +3,16 @@ set -e
 
 echo "Hello gh-repo-rename-alu0101227610!"
 
+# Determine if an executable is in the PATH
+if ! type -p node >/dev/null; then
+   echo "Node not found on the system. Can't work" >&2
+   exit 1
+fi
+
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+# Pass arguments through to another command
+node ${SCRIPT_DIR}/gh-repo-rename-alu0101227610.js "$@"
+
 # Snippets to help get started:
 
 # Determine if an executable is in the PATH
