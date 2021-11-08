@@ -13,12 +13,10 @@ program.version('8.3.0')
 
 program
   .option('-r, --repo <repo>', 'repository')
-  .option('-o, --org <org>', 'org')
-  .option('-h, --help <help>', 'help');
+  .option('-o, --org <org>', 'org');
 
 program.parse(process.argv);
 
   const options = program.opts();
   if (options.repo) console.log(`repository: ${options.repo}`);
-  if (options.org) console.log(`org: ${options.org}`);
-  if (options.help) console.log(`help: ${options.help}`);
+  if (options.org) console.log(`org: ${options.org}`);;
