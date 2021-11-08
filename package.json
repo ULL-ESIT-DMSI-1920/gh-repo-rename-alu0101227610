@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "comander": "^0.0.1-security",
+    "commander": "^8.3.0",
     "shelljs": "^0.8.4"
   },
   "name": "gh-repo-rename-alu0101227610",
