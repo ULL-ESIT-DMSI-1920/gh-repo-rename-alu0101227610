@@ -9,6 +9,8 @@ const shell = require('shelljs');
 const { Command } = require('commander');
 const program = new Command();
 
+program.version('8.3.0')
+
 program
   .option('-r, --repo <repo>', 'repository')
   .option('-o, --org <org>', 'org')
