@@ -21,5 +21,14 @@ program.parse(process.argv);
   if (options.repo) console.log(`repository: ${options.repo}`);
   if (options.org) console.log(`org: ${options.org}`);
 
-if (!shell.which(git)) console.log("git not installed")
-if (!shell.which(gh)) console.log("gh not installed");
+if (!shell.which(git)) shell.echo("git not installed")
+if (!shell.which(gh)) shell.echo("gh not installed");
+
+
+const org = options.org;
+if (!org) {
+    if(program.args.length < 2) {
+        console.log("No arguments specified. sending help")
+        program.help();
+    }
+}
