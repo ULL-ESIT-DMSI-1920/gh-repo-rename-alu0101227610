@@ -19,4 +19,7 @@ program.parse(process.argv);
 
   const options = program.opts();
   if (options.repo) console.log(`repository: ${options.repo}`);
-  if (options.org) console.log(`org: ${options.org}`);;
+  if (options.org) console.log(`org: ${options.org}`);
+
+if (!shell.which(git)) console.log("git not installed")
+if (!shell.which(gh)) console.log("gh not installed");
