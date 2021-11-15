@@ -20,10 +20,10 @@ program.parse(process.argv);
 
 let args = program.args;
 
-let { org, repo } = program.opts();
+let { org, repo, name } = program.opts();
 
 if (repo) console.log(`repository: ${repo}`);
-if (org) console.log(`org: ${org}`);
+if (org) console.log(`owner: ${org}`);
 
 if (!shell.which('git')) shell.echo("git not installed")
 if (!shell.which('gh')) shell.echo("gh not installed");
@@ -33,12 +33,11 @@ if(program.args.length < 1) program.help();
 let newName;
 if (!org) {
   [org, repo] = args[0].split("/");
-  console.log(`org y repo ${org} ${repo}`)
+  console.log(`owner: ${org} repository: ${repo}`)
 
   newName = args[1]
-  console.log(`newName = ${newName}`)
+  shell.exec(`gh api -X PATCH /repos/${org}/${repo} -f name=${name} --jq .[].name`);
 }
 if (!newName) newName = args[0]
 if (!org || !repo || !newName) program.help()
 
-shell.exec('gh api -X PATCH /repos/${org}/${repo} -f name=${name}');
