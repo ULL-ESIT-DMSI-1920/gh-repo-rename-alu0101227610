@@ -13,21 +13,22 @@ const { version } = require("./package.json")
 program
   .version(version)
   .option('-r, --repo <repo>', 'repository')
-  .option('-o, --org <org>', 'org');
+  .option('-o, --org <org>', 'org')
+  .option('-n, --name <name>', 'name');
 
 program.parse(process.argv);
 
 let args = program.args;
 
 let { org, repo } = program.opts();
-console.log(`org y repo ${org} ${repo}`)
-
 
 if (repo) console.log(`repository: ${repo}`);
 if (org) console.log(`org: ${org}`);
 
 if (!shell.which('git')) shell.echo("git not installed")
 if (!shell.which('gh')) shell.echo("gh not installed");
+
+if(program.args.length < 1) program.help();
 
 let newName;
 if (!org) {
@@ -38,5 +39,6 @@ if (!org) {
   console.log(`newName = ${newName}`)
 }
 if (!newName) newName = args[0]
-
 if (!org || !repo || !newName) program.help()
+
+shell.exec('gh api -X PATCH /repos/${org}/${repo} -f name=${name}');
