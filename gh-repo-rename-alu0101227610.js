@@ -31,6 +31,10 @@ if (!shell.which('gh')) shell.echo("gh not installed");
 if(program.args.length < 1) program.help();
 
 let newName;
+
+if (!newName) newName = args[0]
+if (!org || !repo || !newName) program.help()
+
 if (!org) {
   [org, repo] = args[0].split("/");
   console.log(`owner: ${org} repository: ${repo}`)
@@ -38,6 +42,4 @@ if (!org) {
   newName = args[1]
   shell.exec(`gh api -X PATCH /repos/${org}/${repo} -f name=${name} --jq .[].name`);
 }
-if (!newName) newName = args[0]
-if (!org || !repo || !newName) program.help()
 
