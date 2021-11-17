@@ -20,6 +20,7 @@ program.parse(process.argv);
 
 let args = program.args;
 
+let originalName = `${program.opts().name}`;
 let { org, repo, name } = program.opts();
 
 if (repo) console.log(`repository: ${repo}`);
@@ -32,6 +33,7 @@ if (!shell.which('gh')) shell.echo("gh not installed");
 
 //if(program.args.length < 1) program.help();
 
-shell.exec(`gh api -X PATCH /repos/${org}/${repo} -f name=${name}`);
-
+let r = shell.exec(`gh api -X PATCH /repos/${org}/${repo} -f name=${name}`), {silent: true};
+r = JSON.parse(r.stdout)
+console.log(`The repo has been renamed to ${r.full_name}`);
 // --jq .[].name
