@@ -9,7 +9,10 @@
   "version": "1.1.0",
   "main": "gh-repo-rename-alu0101227610.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "create-prueba": "gh create-repo prueba ULL-ESIT-DMSI-1920",
+    "list-prueba": "gh submodule-add -s prueba -o ULL-ESIT-DMSI-1920 -n",
+    "test": "./gh-repo-rename-alu0101227610 -o ULL-ESIT-DMSI-1920 -r prueba  -n prueba-funciona",
+    "back": "./gh-repo-rename-alu0101227610 -o ULL-ESIT-DMSI-1920 -r prueba-funciona  -n prueba",
     "start": "node gh-repo-rename-alu0101227610.js"
   },
   "repository": {
