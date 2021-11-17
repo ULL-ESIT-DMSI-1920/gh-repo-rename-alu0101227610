@@ -16,12 +16,18 @@ program.parse(process.argv);
 
 let args = program.args;
 
+let originalName = `${program.opts().name}`;
+
 let { org, repo, name } = program.opts();
+// console.log(originalName);
 
 if (!org || ! repo || !name) program.help();
 
 if (!shell.which('git')) shell.echo("git not installed")
 if (!shell.which('gh')) shell.echo("gh not installed");
 
-shell.exec(`gh api -X PATCH /repos/${org}/${repo} -f name=${name}`);
+let r = shell.exec(`gh api -X PATCH /repos/${org}/${repo} -f name=${name}`, {silent: true});
 
+let rj = JSON.parse(r.stdout)
+//console.log(`The repo ${org}/${originalName} has been renamed to ${rj.full_name}`);
+console.log(`The repo has been renamed to ${rj.full_name}`);
